@@ -7,9 +7,10 @@ defmodule Recursion do
   end
 
   def requestPdf(n) do
-    IO.puts "requesting #{n}..."
+    number = String.rjust(Integer.to_string(n), 2, ?0)
+    IO.puts "requesting #{number}..."
 
-    url = "http://girls-und-panzer.jp/img/special/web_#{n}r_b.pdf"
+    url = "http://girls-und-panzer.jp/img/special/web_#{number}r_b.pdf"
     %HTTPoison.Response{body: body, status_code: status} = HTTPoison.get!(url)
 
     if status == 200 do
@@ -17,7 +18,7 @@ defmodule Recursion do
       File.write!(file, body)
       IO.puts "save #{file} (๑´ڡ`๑)"
       :ok
-    else 
+    else
       IO.puts "failed to get #{url} _(:3」∠)_"
       :ng
     end
@@ -25,4 +26,4 @@ defmodule Recursion do
 end
 
 HTTPoison.start
-Recursion.getGup(157)
+Recursion.getGup(194)
